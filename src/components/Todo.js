@@ -1,6 +1,6 @@
 import React from "react";
 
-const Todo = ({ text, todo, todos, setTodos, time }) => {
+const Todo = ({ text, todo, todos, setTodos, dueDate, reminderDate }) => {
   const deleteHandler = () => {
     setTodos(todos.filter((el) => el.id !== todo.id));
   };
@@ -25,7 +25,10 @@ const Todo = ({ text, todo, todos, setTodos, time }) => {
         {text}
       </li>
       <li className={`todo-item  ${todo.completed ? "completed" : ""}`}>
-        Reminder: {time}
+        Due: {dueDate}
+      </li>
+      <li className={`todo-item  ${todo.completed ? "completed" : ""}`}>
+        Reminder: {reminderDate}
       </li>
       <button onClick={completeHandler} className="complete-btn">
         <i className="fas fa-check"></i>

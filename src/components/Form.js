@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { DateTimePicker } from "react-rainbow-components";
 
 const Form = ({
   setInputText,
@@ -8,30 +9,50 @@ const Form = ({
   setStatus,
   setInputTime,
   inputTime,
+  setSelectedDate,
+  selectedDate,
+  setReminderDate,
+  reminderDate,
 }) => {
+  var reminderTime;
+  var time;
+  var dueDates;
+  const dateChangeHandler = (date) => {
+    setSelectedDate(date);
+  };
+
+  const dateReminderHandler = (date) => {
+    setReminderDate(date);
+  };
+
   const inputTextHandler = (e) => {
     setInputText(e.target.value);
-  };
-  const inputTimeHandler = (e) => {
-    setInputTime(e.target.value);
   };
 
   const sumbitTodoHandler = (e) => {
     e.preventDefault();
+    selectedDate = selectedDate.toLocaleString("en-CA");
+    reminderDate = reminderDate.toLocaleString("en-CA");
+
     setTodos([
       ...todos,
       {
         text: inputText,
         completed: false,
         id: Math.random() * 1000,
-        time: inputTime,
-        reminder: reminderTime,
+        dueDate: selectedDate,
+        reminderDate: reminderDate,
       },
     ]);
     setInputText("");
+    setSelectedDate(new Date());
   };
   const statusHandler = (e) => {
     setStatus(e.target.value);
+  };
+
+  const reminderTimeHandler = (e) => {
+    reminderTime = e.target.value;
   };
 
   var today = new Date();
@@ -78,31 +99,26 @@ const Form = ({
         <tr>
           <table>
             <tr>
-              <td>Complete by:</td>
               <td>
-                <input
-                  type="time"
-                  value={inputTime}
-                  placeholder={time}
+                <DateTimePicker
+                  label="complete By"
+                  minDate={new Date()}
+                  value={selectedDate}
                   className="todo-input"
-                  onChange={inputTimeHandler}
+                  onChange={dateChangeHandler}
+                  placeholder="enter due date"
                 />
               </td>
-            </tr>
-            <tr>
-              <td>Reminder:</td>
               <td>
-                <div className="select">
-                  <select
-                    onChange={statusHandler}
-                    name={reminderTime}
-                    className="filter-todo"
-                  >
-                    <option value="15">15 Minutes</option>
-                    <option value="30">30 Minutes</option>
-                    <option value="45">45 Minutes</option>
-                  </select>
-                </div>
+                <DateTimePicker
+                  label="Set Reminder"
+                  minDate={new Date()}
+                  maxDate={selectedDate}
+                  value={reminderDate}
+                  className="todo-input"
+                  onChange={dateReminderHandler}
+                  placeholder="enter reminder date"
+                />
               </td>
             </tr>
           </table>

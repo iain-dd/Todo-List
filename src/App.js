@@ -13,6 +13,9 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
+  const [selectedDate, setSelectedDate] = useState();
+  const [reminderDate, setReminderDate] = useState();
+
   useEffect(() => {
     getLocalTodos();
   }, []);
@@ -56,12 +59,16 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Iain's Todo List</h1>
+        <h1>Todo List</h1>
       </header>
       <Form
+        reminderDate={reminderDate}
+        selectedDate={selectedDate}
         inputTime={inputTime}
         inputText={inputText}
         todos={todos}
+        setReminderDate={setReminderDate}
+        setSelectedDate={setSelectedDate}
         setTodos={setTodos}
         setInputText={setInputText}
         setInputTime={setInputTime}

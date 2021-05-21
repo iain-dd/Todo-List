@@ -12,7 +12,8 @@ const TodoList = ({ todos, setTodos, filteredTodos }) => {
             todo={todo}
             key={todo.id}
             text={todo.text}
-            time={todo.time}
+            dueDate={todo.dueDate}
+            reminderDate={todo.reminderDate}
           />
         ))}
       </ul>
