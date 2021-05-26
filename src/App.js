@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
 
 //Importing Components
@@ -7,6 +7,7 @@ import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 
 function App() {
+  document.title = "Todo List";
   //States
   const [inputTime, setInputTime] = useState("");
   const [inputText, setInputText] = useState("");
